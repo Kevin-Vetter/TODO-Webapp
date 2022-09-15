@@ -3,8 +3,50 @@
 @{
     ViewData["Title"] = "Home page";
 }
+<body>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>
+    <form method="post" class="align-content-center">
+        <ul class="list-group row-cols-2 align-items-center text-center">
+            @for (int i = 0; i < Model.ToDos.Count; i++)
+            {
+                <li class="list-group-item" id="listItem_@i" onmouseover="highlightListItem('listItem_@i')" onmouseout="deHighlightListItem('listItem_@i')">
+                    <p>
+                        @Model.ToDos[i].Description,
+                        @Model.ToDos[i].Importance,
+                        @Model.ToDos[i].Deadline.Day/
+                        @Model.ToDos[i].Deadline.Month/
+                        @Model.ToDos[i].Deadline.Year
+                        @if (Model.ToDos[i].IsCompleted)
+                        {
+                            <input class="form-check-input float-end" type="checkbox" id="check1" name="option1" value="something" checked>
+                        }
+                        else
+                        {
+                            <input class="form-check-input float-end" style="font-size:xx-large;" type="checkbox" id="check1" name="option1" value="something">
+                        }
+                    </p>
+                </li>
+            }
+        </ul>
+        <div class="col text-center">
+
+        <input type="submit" class="btn btn-primary mt-2" />
+        </div>
+    </form>
+
+</body>
+<script type="text/javascript">
+    function highlightListItem(id) {
+        var element = document.getElementById(id)
+        element.classList.add('active')
+    }
+    function deHighlightListItem(id) {
+        var element = document.getElementById(id)
+        element.classList.remove("active")
+    }
+
+</script>

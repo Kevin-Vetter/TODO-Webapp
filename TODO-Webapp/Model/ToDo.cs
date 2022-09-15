@@ -1,6 +1,6 @@
 ﻿namespace TODO_Webapp.Model
 {
-    public class ToDo
+    public record ToDo
     {
         public string Id { get;} = Guid.NewGuid().ToString();
         public string Description { get; set; }
@@ -12,9 +12,9 @@
         public ToDo(string description, DateTime? deadline, Priority priority = Priority.Normal)
         {
             if (deadline == null)
-            {
                 Deadline = DateTime.Today.AddDays(1);
-            }
+            else
+                Deadline = DateTime.Today.Date;
             Description = description;
             Importance = priority;
         }
