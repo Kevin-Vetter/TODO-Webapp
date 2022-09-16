@@ -1,0 +1,12 @@
+﻿body {
+}
+
+.GreyHover {
+    background-color: #d3d3d3;
+}
+
+input[type='radio'] {
+    height: 35px;
+    width: 35px;
+    vertical-align: middle;
+}
