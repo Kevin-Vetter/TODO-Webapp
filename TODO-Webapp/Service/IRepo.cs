@@ -6,7 +6,7 @@ namespace TODO_Webapp.Service.Interface
     {
         void CreateToDo(string description, DateTime? deadline);
         void CreateToDo(string description, DateTime? deadline, Priority priority);
-        void DeleteToDo();
+        void DeleteToDo(string guid);
         List<ToDo> GetAllToDos();
         ToDo GetToDoById(string id);
         void UpdateToDo(ToDo toDo);

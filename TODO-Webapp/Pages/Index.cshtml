@@ -9,50 +9,95 @@
         <h1 class="display-4">Welcome</h1>
         <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     </div>
-    <ul class="list-group row-cols-2 align-items-center text-center">
-        @for (int i = 0; i < Model.ToDos.Count; i++)
-        {
-            <li class="list-group-item" id="listItem_@i" onmouseover="highlightListItem('listItem_@i')" onmouseout="deHighlightListItem('listItem_@i')">
-                <p>
-                    @if (Model.ToDos[i].Importance == TODO_Webapp.Model.Priority.High)
-                    {
-                        <span class="badge bg-danger">@Model.ToDos[i].Importance</span>
-                    }
-                    else if (Model.ToDos[i].Importance == TODO_Webapp.Model.Priority.Low)
-                    {
-                        <span class="badge bg-warning">@Model.ToDos[i].Importance</span>
-                    }
-                    else
-                    {
-                        <span class="badge bg-success">@Model.ToDos[i].Importance</span>
-                    }
-                    @Model.ToDos[i].Description
-                    ,
-                    @Model.ToDos[i].Importance,
-                    @Model.ToDos[i].Deadline.Day/
-                    @Model.ToDos[i].Deadline.Month/
-                    @Model.ToDos[i].Deadline.Year
-                    @if (Model.ToDos[i].IsCompleted)
-                    {
-                        <input class="form-check-input float-end" type="checkbox" id="check1" name="option1" value="something" checked>
-                    }
-                    else
-                    {
-                        <input class="form-check-input float-end" style="font-size:xx-large;" type="checkbox" id="check1" name="option1" value="something">
-                    }
-                    <input type="hidden" value="@Model.ToDos[i].Id" />
-                </p>
-            </li>
-        }
-    </ul>
 
+    <div class="d-flex justify-content-around mb-3">
+        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+            <label class="btn btn-outline-primary" for="btnradio1">Radio 1</label>
+
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btnradio2">Radio 2</label>
+
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btnradio3">Radio 3</label>
+        </div>
+        <div class="align-self-center">
+            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#myModal">
+                New
+            </button>
+            <button type="button" class="btn btn-primary">
+                Save
+            </button>
+        </div>
+        <div>
+        </div>
+        <div></div>
+    </div>
+
+    <table class="table table-hover row-cols-3 align-items-center">
+        <thead>
+            <tr>
+                <th>Importance</th>
+                <th>Description</th>
+                <th>Deadline</th>
+                <th>State</th>
+                <th>Secret</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.ToDos.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @if (Model.ToDos[i].Importance == TODO_Webapp.Model.Priority.High)
+                        {
+                            <span class="badge bg-danger">@Model.ToDos[i].Importance</span>
+                        }
+                        else if (Model.ToDos[i].Importance == TODO_Webapp.Model.Priority.Low)
+                        {
+                            <span class="badge bg-warning">@Model.ToDos[i].Importance</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-success">@Model.ToDos[i].Importance</span>
+                        }
+                    </td>
+                    <td>
+                        @Model.ToDos[i].Description
+                    </td>
+                    <td>
+                        @Model.ToDos[i].Deadline.Day/
+                        @Model.ToDos[i].Deadline.Month/
+                        @Model.ToDos[i].Deadline.Year
+                    </td>
+                    <td class="texc">
+                        <div>
+                            <form class="form-check-inline">
+                                <input type="hidden" asp-for="Guid" value="@Model.ToDos[i].Id" />
+                                <input class="form-check-input rounded d-inline-block" asp-page-handler="Complete" id="CompleteBtn_@i" onmouseover="UnFilter('CompleteBtn_@i')" onmouseout="Filter('CompleteBtn_@i')" src="/sources/Complete.png" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="submit"/>
+                            </form>
+                            <form method="post" class="form-check-inline">
+                                <input type="hidden" asp-for="Guid" value="@Model.ToDos[i].Id" />
+                                <input class="form-check-input rounded d-inline-block" asp-page-handler="Delete" id="DeleteBtn_@i" onmouseover="UnFilter('DeleteBtn_@i')" onmouseout="Filter('DeleteBtn_@i')" src="/sources/Delete.png" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="submit"/>
+                            </form>
+                            <form class="form-check-inline">
+                                <input type="hidden" asp-for="Guid" value="@Model.ToDos[i].Id" />
+                                <input class="form-check-input rounded d-inline-block" asp-page-handler="Edit" id="EditBtn_@i" onmouseover="UnFilter('EditBtn_@i')" onmouseout="Filter('EditBtn_@i')" src="/sources/Edit.png" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="button"/>
+                            </form>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-inline-block ">
+                            <input type="radio" name="SecretFeature-@i" class="fs-3" />
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
 
     <form method="post" class="align-content-center">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
-            Open modal
-        </button>
-
         <!-- The Modal -->
         <div class="modal" id="myModal">
             <div class="modal-dialog">
@@ -70,16 +115,16 @@
                             <input type="text" maxlength="25" class="rounded" required asp-for="@Model.Description" />
                         </div>
                         <div class="d-inline-block float-end">
-                            <input type="radio" name="SecretFeature" class="fs-3"/>
-                            <input type="radio" name="SecretFeature" class="fs-3"/>
-                            <input type="radio" name="SecretFeature" class="fs-3"/>
+                            <input type="radio" name="SecretFeature" class="fs-3" />
+                            <input type="radio" name="SecretFeature" class="fs-3" />
+                            <input type="radio" name="SecretFeature" class="fs-3" />
                         </div>
 
                     </div>
 
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <input type="submit" class="btn btn-primary mt-2" />
+                        <input type="submit" class="btn btn-primary mt-2" asp-page-handler="New" />
                     </div>
 
                 </div>
@@ -91,13 +136,13 @@
 
 </body>
 <script type="text/javascript">
-    function highlightListItem(id) {
+    function UnFilter(id) {
         var element = document.getElementById(id)
-        element.classList.add('GreyHover')
+        element.style.filter = 'grayscale(0%)'
     }
-    function deHighlightListItem(id) {
+    function Filter(id) {
         var element = document.getElementById(id)
-        element.classList.remove("GreyHover")
+        element.style.filter = 'grayscale(100%)'
     }
 
 </script>

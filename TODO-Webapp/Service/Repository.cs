@@ -23,6 +23,10 @@ namespace TODO_Webapp.Service.Interface
             return _toDos;
         }
         public void UpdateToDo(ToDo toDo) { }
-        public void DeleteToDo() { }
+        public void DeleteToDo(string guid)
+        {
+            _toDos.Remove(_toDos.First(g => g.Id == guid));
+            
+        }
     }
 }

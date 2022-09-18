@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using TODO_Webapp.Service.Interface;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using TODO_Webapp.Model;
-using System.ComponentModel.DataAnnotations;
 
 namespace TODO_Webapp.Pages
 {
@@ -13,6 +13,8 @@ namespace TODO_Webapp.Pages
         public string Description { get; set; }
         [BindProperty]
         public Priority Priority { get; set; }
+        [BindProperty, Required]
+        public string Guid { get; set; }
 
         public List<ToDo> ToDos { get; set; }
 
@@ -31,10 +33,29 @@ namespace TODO_Webapp.Pages
             _repo.CreateToDo("somting", DateTime.Today.Date, Priority.High);
         }
 
-        public void OnPost()
+        public IActionResult OnPostNew()
         {
-            _repo.CreateToDo(Description, DateTime.Today.Date);
+            _repo.CreateToDo(Description, DateTime.Today.Date, Priority);
+            // HACK: there must be a better way
+            return RedirectToPage();
+        }
+        public void OnPostSave()
+        {
 
+        }
+        public void OnPostEdit()
+        {
+
+        }
+        public void OnPostComplete()
+        {
+
+        }
+        public IActionResult OnPostDelete()
+        {
+            _repo.DeleteToDo(Guid);
+            // HACK: there must be a better way
+            return RedirectToPage();
         }
     }
 }
