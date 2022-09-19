@@ -1,4 +1,4 @@
-﻿@page 
+﻿@page
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
@@ -72,17 +72,27 @@
                     </td>
                     <td class="texc">
                         <div>
-                            <form class="form-check-inline">
+                            @if (!Model.ToDos[i].IsCompleted)
+                            {
+                                <form method="post" class="form-check-inline">
+                                    <input type="hidden" asp-for="Guid" value="@Model.ToDos[i].Id" />
+                                    <input class="form-check-input rounded d-inline-block" asp-page-handler="Complete" id="CompleteBtn_@i" onmouseover="UnFilter('CompleteBtn_@i')" onmouseout="Filter('CompleteBtn_@i')" src="/sources/UnCompleted.png" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="submit" />
+                                </form>
+                            }
+                            else
+                            {
+                                <form class="form-check-inline">
+                                    <input class="form-check-input rounded d-inline-block" id="CompleteBtn_@i" src="/sources/Complete.png" style="font-size:xx-large;" type="image" disabled />
+                                    <input type="hidden" />
+                                </form>
+                            }
+                            <form method="post" class="form-check-inline">
                                 <input type="hidden" asp-for="Guid" value="@Model.ToDos[i].Id" />
-                                <input class="form-check-input rounded d-inline-block" asp-page-handler="Complete" id="CompleteBtn_@i" onmouseover="UnFilter('CompleteBtn_@i')" onmouseout="Filter('CompleteBtn_@i')" src="/sources/Complete.png" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="submit"/>
+                                <input class="form-check-input rounded d-inline-block" asp-page-handler="Delete" id="DeleteBtn_@i" src="/sources/Delete.png" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="submit" />
                             </form>
                             <form method="post" class="form-check-inline">
                                 <input type="hidden" asp-for="Guid" value="@Model.ToDos[i].Id" />
-                                <input class="form-check-input rounded d-inline-block" asp-page-handler="Delete" id="DeleteBtn_@i" onmouseover="UnFilter('DeleteBtn_@i')" onmouseout="Filter('DeleteBtn_@i')" src="/sources/Delete.png" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="submit"/>
-                            </form>
-                            <form class="form-check-inline">
-                                <input type="hidden" asp-for="Guid" value="@Model.ToDos[i].Id" />
-                                <input class="form-check-input rounded d-inline-block" asp-page-handler="Edit" id="EditBtn_@i" onmouseover="UnFilter('EditBtn_@i')" onmouseout="Filter('EditBtn_@i')" src="/sources/Edit.png" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="button"/>
+                                <input class="form-check-input rounded d-inline-block" asp-page-handler="Edit" id="EditBtn_@i" onmouseover="UnFilter('EditBtn_@i')" onmouseout="Filter('EditBtn_@i')" src="/sources/Edit.png" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="button" />
                             </form>
                         </div>
                     </td>

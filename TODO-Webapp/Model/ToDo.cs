@@ -22,6 +22,21 @@
             Description = description;
             Importance = priority;
         }
+
+        public ToDo(string? guid, string description, DateTime? deadline, bool completed, Priority priority = Priority.Normal)
+        {
+            if (!string.IsNullOrEmpty(guid))
+            {
+                Id = guid;
+            }
+            if (deadline == null)
+                Deadline = DateTime.Today.AddDays(1);
+            else
+                Deadline = DateTime.Today.Date;
+            Description = description;
+            Importance = priority;
+            IsCompleted = completed;
+        }
     }
     public enum Priority
     {

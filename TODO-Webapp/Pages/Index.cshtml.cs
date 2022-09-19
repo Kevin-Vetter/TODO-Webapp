@@ -15,6 +15,10 @@ namespace TODO_Webapp.Pages
         public Priority Priority { get; set; }
         [BindProperty, Required]
         public string Guid { get; set; }
+        [BindProperty]
+        public bool Completed { get; set; }
+        [BindProperty, Required]
+        public DateTime DeadLine { get; set; }
 
         public List<ToDo> ToDos { get; set; }
 
@@ -35,21 +39,16 @@ namespace TODO_Webapp.Pages
 
         public IActionResult OnPostNew()
         {
-            _repo.CreateToDo(Description, DateTime.Today.Date, Priority);
-            // HACK: there must be a better way
-            return RedirectToPage();
-        }
-        public void OnPostSave()
-        {
-
+                _repo.CreateToDo(Description, DateTime.Today.Date, Priority);
+                return RedirectToPage();
         }
         public void OnPostEdit()
         {
-
+            _repo.UpdateToDo(Guid, Description, DeadLine, Priority, Completed);
         }
         public IActionResult OnPostComplete()
         {
-            _repo.CompleteToDo();
+            _repo.CompleteToDo(Guid);
             return RedirectToPage();
         }
         public IActionResult OnPostDelete()

@@ -22,9 +22,9 @@ namespace TODO_Webapp.Service.Interface
         {
             return _toDos;
         }
-        public void UpdateToDo(string guid, string description, DateTime deadline, Priority priority) {
+        public void UpdateToDo(string guid, string description, DateTime deadline, Priority priority, bool completed) {
             DeleteToDo(guid);
-            _toDos.Add(new ToDo(guid ,description, deadline, priority));
+            _toDos.Add(new ToDo(guid ,description, deadline, completed, priority));
         }
         public void DeleteToDo(string guid)
         {
@@ -32,7 +32,9 @@ namespace TODO_Webapp.Service.Interface
         }
         public void CompleteToDo(string guid)
         {
-            
+            ToDo idk = GetToDoById(guid);
+            DeleteToDo(guid);
+            _toDos.Add(idk with { IsCompleted = true });
         }
     }
 }

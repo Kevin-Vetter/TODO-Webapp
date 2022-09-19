@@ -9,6 +9,7 @@ namespace TODO_Webapp.Service.Interface
         void DeleteToDo(string guid);
         List<ToDo> GetAllToDos();
         ToDo GetToDoById(string id);
-        void UpdateToDo(string guid, string description, DateTime deadline, Priority priority);
+        void UpdateToDo(string guid, string description, DateTime deadline, Priority priority, bool completed);
+        void CompleteToDo(string guid);
     }
 }
