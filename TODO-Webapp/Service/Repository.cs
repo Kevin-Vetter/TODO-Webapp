@@ -8,13 +8,13 @@ namespace TODO_Webapp.Service.Interface
 
         public void CreateToDo(string description, DateTime? deadline)
         {
-            _toDos.Add(new ToDo(description, deadline));
+            _toDos.Add(new ToDo("",description, deadline));
         }
         public void CreateToDo(string description, DateTime? deadline, Priority priority)
         {
-            _toDos.Add(new ToDo(description, deadline, priority));
+            _toDos.Add(new ToDo("", description, deadline, priority));
         }
-        public ToDo GetToDoById(string id)
+        public ToDo GetToDoById(string id) 
         {
                 return _toDos.First(t => t.Id == id);
         }
@@ -22,10 +22,16 @@ namespace TODO_Webapp.Service.Interface
         {
             return _toDos;
         }
-        public void UpdateToDo(ToDo toDo) { }
+        public void UpdateToDo(string guid, string description, DateTime deadline, Priority priority) {
+            DeleteToDo(guid);
+            _toDos.Add(new ToDo(guid ,description, deadline, priority));
+        }
         public void DeleteToDo(string guid)
         {
-            _toDos.Remove(_toDos.First(g => g.Id == guid));
+            _toDos.Remove(GetToDoById(guid));
+        }
+        public void CompleteToDo(string guid)
+        {
             
         }
     }

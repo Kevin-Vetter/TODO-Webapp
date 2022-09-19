@@ -47,9 +47,10 @@ namespace TODO_Webapp.Pages
         {
 
         }
-        public void OnPostComplete()
+        public IActionResult OnPostComplete()
         {
-
+            _repo.CompleteToDo();
+            return RedirectToPage();
         }
         public IActionResult OnPostDelete()
         {
