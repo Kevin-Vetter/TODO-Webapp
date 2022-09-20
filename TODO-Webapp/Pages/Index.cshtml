@@ -88,11 +88,10 @@
                             }
                             <form method="post" class="form-check-inline">
                                 <input type="hidden" asp-for="Guid" value="@Model.ToDos[i].Id" />
-                                <input class="form-check-input rounded d-inline-block" asp-page-handler="Delete" id="DeleteBtn_@i" src="/sources/Delete.png" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="submit" />
+                                <input class="form-check-input rounded d-inline-block" asp-page-handler="Delete" id="DeleteBtn_@i" src="/sources/Delete.png" onmouseover="UnFilter('DeleteBtn_@i')" onmouseout="Filter('DeleteBtn_@i')" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="submit" />
                             </form>
-                            <form method="post" class="form-check-inline">
-                                <input type="hidden" asp-for="Guid" value="@Model.ToDos[i].Id" />
-                                <input class="form-check-input rounded d-inline-block" asp-page-handler="Edit" id="EditBtn_@i" onmouseover="UnFilter('EditBtn_@i')" onmouseout="Filter('EditBtn_@i')" src="/sources/Edit.png" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="button" />
+                            <form onsubmit="return false;" class="form-check-inline">
+                                <input class="form-check-input rounded d-inline-block" data-bs-toggle="modal" data-bs-target="#EditModal" onclick="BSData('@Model.ToDos[i].Importance', '@Model.ToDos[i].Description',@Model.ToDos[i].Deadline.ToShortDateString(), '@Model.ToDos[i].Id')" id="EditBtn_@i" onmouseover="UnFilter('EditBtn_@i')" onmouseout="Filter('EditBtn_@i')" src="/sources/Edit.png" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="button" />
                             </form>
                         </div>
                     </td>
@@ -107,8 +106,8 @@
     </table>
 
 
+    <!-- The New Modal -->
     <form method="post" class="align-content-center">
-        <!-- The Modal -->
         <div class="modal" id="myModal">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -144,15 +143,69 @@
         </div>
     </form>
 
+    <!-- The Edit Modal -->
+    <form method="post" class="align-content-center">
+        <div class="modal" id="EditModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <select class="form-select" id="EditSelect" asp-for="Priority">
+                            <option id="EditPriority1" value="0">Low</option>
+                            <option id="EditPriority2" value="1">Normal</option>
+                            <option id="EditPriority3" value="2">High</option>
+                        </select>
+                        <br />
+                        <div class="d-inline-block">
+                            <input type="text" value="idk" maxlength="25" class="rounded" id="EditDes" required asp-for="@Model.Description" />
+                        </div>
+                        <div class="d-inline-block float-end">
+                            <input type="radio" name="SecretFeature" class="fs-3" />
+                            <input type="radio" name="SecretFeature" class="fs-3" />
+                            <input type="radio" name="SecretFeature" class="fs-3" />
+                        </div>
+                        <input type="datetime" asp-for="DeadLine" />
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-primary mt-2" asp-page-handler="Edit" />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col text-center">
+        </div>
+    </form>
+
 </body>
 <script type="text/javascript">
     function UnFilter(id) {
-        var element = document.getElementById(id)
+        let element = document.getElementById(id)
         element.style.filter = 'grayscale(0%)'
     }
     function Filter(id) {
-        var element = document.getElementById(id)
+        let element = document.getElementById(id)
         element.style.filter = 'grayscale(100%)'
     }
 
+    function BSData(pri, des, dead, guid) {
+        document.getElementById('EditDes').value = des;
+        let select = document.getElementById('EditSelect');
+
+        if (pri == 'Low')
+            select.value = '0'
+        else if (pri == 'Normal') 
+            select.value = '1'
+        else 
+            select.value = '2'
+        
+
+    }
+
+    function L() {
+
+    }
 </script>
