@@ -11,40 +11,39 @@
     </div>
 
     <div class="d-flex justify-content-around mb-3">
-        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
-            <label class="btn btn-outline-primary" for="btnradio1">Radio 1</label>
 
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-            <label class="btn btn-outline-primary" for="btnradio2">Radio 2</label>
+        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" >
+            <label class="btn btn-outline-primary" onclick="FilterTables('1')" for="btnradio1">Done</label>
+
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" checked>
+            <label class="btn btn-outline-primary" onclick="FilterTables('2')" for="btnradio2">Uncompleted</label>
 
             <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
-            <label class="btn btn-outline-primary" for="btnradio3">Radio 3</label>
+            <label class="btn btn-outline-primary" onclick="FilterTables('3')" for="btnradio3">All</label>
         </div>
+
         <div class="align-self-center">
             <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#myModal">
                 New
             </button>
-            <button type="button" class="btn btn-primary">
-                Save
-            </button>
         </div>
-        <div>
-        </div>
+        <div></div>
         <div></div>
     </div>
 
-    <table class="table table-hover row-cols-3 align-items-center">
+
+    <table class="table table-hover row-cols-3 align-items-center" id="tableAll" style="display:none">
         <thead>
             <tr>
                 <th>Importance</th>
                 <th>Description</th>
                 <th>Deadline</th>
-                <th>State</th>
-                <th>Secret</th>
+                <th>Controls</th>
             </tr>
         </thead>
         <tbody>
+
             @for (int i = 0; i < Model.ToDos.Count; i++)
             {
                 <tr>
@@ -66,9 +65,7 @@
                         @Model.ToDos[i].Description
                     </td>
                     <td>
-                        @Model.ToDos[i].Deadline.Day/
-                        @Model.ToDos[i].Deadline.Month/
-                        @Model.ToDos[i].Deadline.Year
+                        @Model.ToDos[i].Deadline.ToShortDateString()
                     </td>
                     <td class="texc">
                         <div>
@@ -95,16 +92,142 @@
                             </form>
                         </div>
                     </td>
-                    <td>
-                        <div class="d-inline-block ">
-                            <input type="radio" name="SecretFeature-@i" class="fs-3" />
-                        </div>
-                    </td>
                 </tr>
             }
         </tbody>
     </table>
+    <table class="table table-hover row-cols-3 align-items-center" id="tableTodo" >
+        <thead>
+            <tr>
+                <th>Importance</th>
+                <th>Description</th>
+                <th>Deadline</th>
+                <th>Controls</th>
+            </tr>
+        </thead>
+        <tbody>
 
+            @for (int i = 0; i < Model.ToDos.Count; i++)
+            {
+                @if (!Model.ToDos[i].IsCompleted)
+                {
+                    <tr>
+                        <td>
+                            @if (Model.ToDos[i].Importance == TODO_Webapp.Model.Priority.High)
+                            {
+                                <span class="badge bg-danger">@Model.ToDos[i].Importance</span>
+                            }
+                            else if (Model.ToDos[i].Importance == TODO_Webapp.Model.Priority.Low)
+                            {
+                                <span class="badge bg-warning">@Model.ToDos[i].Importance</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-success">@Model.ToDos[i].Importance</span>
+                            }
+                        </td>
+                        <td>
+                            @Model.ToDos[i].Description
+                        </td>
+                        <td>
+                            @Model.ToDos[i].Deadline.ToShortDateString()
+                        </td>
+                        <td class="texc">
+                            <div>
+                                @if (!Model.ToDos[i].IsCompleted)
+                                {
+                                    <form method="post" class="form-check-inline">
+                                        <input type="hidden" asp-for="Guid" value="@Model.ToDos[i].Id" />
+                                        <input class="form-check-input rounded d-inline-block" asp-page-handler="Complete" id="CompleteBtn_@i" onmouseover="UnFilter('CompleteBtn_@i')" onmouseout="Filter('CompleteBtn_@i')" src="/sources/UnCompleted.png" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="submit" />
+                                    </form>
+                                }
+                                else
+                                {
+                                    <form class="form-check-inline">
+                                        <input class="form-check-input rounded d-inline-block" id="CompleteBtn_@i" src="/sources/Complete.png" style="font-size:xx-large;" type="image" disabled />
+                                        <input type="hidden" />
+                                    </form>
+                                }
+                                <form method="post" class="form-check-inline">
+                                    <input type="hidden" asp-for="Guid" value="@Model.ToDos[i].Id" />
+                                    <input class="form-check-input rounded d-inline-block" asp-page-handler="Delete" id="DeleteBtn_@i" src="/sources/Delete.png" onmouseover="UnFilter('DeleteBtn_@i')" onmouseout="Filter('DeleteBtn_@i')" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="submit" />
+                                </form>
+                                <form onsubmit="return false;" class="form-check-inline">
+                                    <input class="form-check-input rounded d-inline-block" data-bs-toggle="modal" data-bs-target="#EditModal" onclick="BSData('@Model.ToDos[i].Importance', '@Model.ToDos[i].Description',@Model.ToDos[i].Deadline.ToShortDateString(), '@Model.ToDos[i].Id')" id="EditBtn_@i" onmouseover="UnFilter('EditBtn_@i')" onmouseout="Filter('EditBtn_@i')" src="/sources/Edit.png" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="button" />
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <table class="table table-hover row-cols-3 align-items-center" id="tableDone" style="display:none">
+        <thead>
+            <tr>
+                <th>Importance</th>
+                <th>Description</th>
+                <th>Deadline</th>
+                <th>Controls</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @for (int i = 0; i < Model.ToDos.Count; i++)
+            {
+                @if (Model.ToDos[i].IsCompleted)
+                {
+                    <tr>
+                        <td>
+                            @if (Model.ToDos[i].Importance == TODO_Webapp.Model.Priority.High)
+                            {
+                                <span class="badge bg-danger">@Model.ToDos[i].Importance</span>
+                            }
+                            else if (Model.ToDos[i].Importance == TODO_Webapp.Model.Priority.Low)
+                            {
+                                <span class="badge bg-warning">@Model.ToDos[i].Importance</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-success">@Model.ToDos[i].Importance</span>
+                            }
+                        </td>
+                        <td>
+                            @Model.ToDos[i].Description
+                        </td>
+                        <td>
+                            @Model.ToDos[i].Deadline.ToShortDateString()
+                        </td>
+                        <td class="texc">
+                            <div>
+                                @if (!Model.ToDos[i].IsCompleted)
+                                {
+                                    <form method="post" class="form-check-inline">
+                                        <input type="hidden" asp-for="Guid" value="@Model.ToDos[i].Id" />
+                                        <input class="form-check-input rounded d-inline-block" asp-page-handler="Complete" id="CompleteBtn_@i" onmouseover="UnFilter('CompleteBtn_@i')" onmouseout="Filter('CompleteBtn_@i')" src="/sources/UnCompleted.png" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="submit" />
+                                    </form>
+                                }
+                                else
+                                {
+                                    <form class="form-check-inline">
+                                        <input class="form-check-input rounded d-inline-block" id="CompleteBtn_@i" src="/sources/Complete.png" style="font-size:xx-large;" type="image" disabled />
+                                        <input type="hidden" />
+                                    </form>
+                                }
+                                <form method="post" class="form-check-inline">
+                                    <input type="hidden" asp-for="Guid" value="@Model.ToDos[i].Id" />
+                                    <input class="form-check-input rounded d-inline-block" asp-page-handler="Delete" id="DeleteBtn_@i" src="/sources/Delete.png" onmouseover="UnFilter('DeleteBtn_@i')" onmouseout="Filter('DeleteBtn_@i')" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="submit" />
+                                </form>
+                                <form onsubmit="return false;" class="form-check-inline">
+                                    <input class="form-check-input rounded d-inline-block" data-bs-toggle="modal" data-bs-target="#EditModal" onclick="BSData('@Model.ToDos[i].Importance', '@Model.ToDos[i].Description',@Model.ToDos[i].Deadline.ToShortDateString(), '@Model.ToDos[i].Id')" id="EditBtn_@i" onmouseover="UnFilter('EditBtn_@i')" onmouseout="Filter('EditBtn_@i')" src="/sources/Edit.png" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="button" />
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
 
     <!-- The New Modal -->
     <form method="post" class="align-content-center">
@@ -114,6 +237,7 @@
 
                     <!-- Modal body -->
                     <div class="modal-body">
+                        <label>Priority</label>
                         <select class="form-select" asp-for="Priority">
                             <option value="0">Low</option>
                             <option value="1" selected>Normal</option>
@@ -121,12 +245,14 @@
                         </select>
                         <br />
                         <div class="d-inline-block">
-                            <input type="text" maxlength="25" class="rounded" required asp-for="@Model.Description" />
+                            <label>Description</label>
+                            <input type="hidden" asp-for="Guid" value="guid"/>
+                            <input type="text" class="mb-3" maxlength="25" class="rounded" required asp-for="@Model.Description" />
+
                         </div>
-                        <div class="d-inline-block float-end">
-                            <input type="radio" name="SecretFeature" class="fs-3" />
-                            <input type="radio" name="SecretFeature" class="fs-3" />
-                            <input type="radio" name="SecretFeature" class="fs-3" />
+                        <div>
+                            <label>Deadline</label>
+                            <input type="date" asp-for="DeadLine" value="@DateTime.Today.ToString("yyyy-MM-dd")" min="@DateTime.Today.ToString("yyyy-MM-dd")" asp-for="DeadLine" />
                         </div>
 
                     </div>
@@ -151,26 +277,30 @@
 
                     <!-- Modal body -->
                     <div class="modal-body">
+                        <input type="hidden" id="EditID" asp-for="Guid" />
                         <select class="form-select" id="EditSelect" asp-for="Priority">
                             <option id="EditPriority1" value="0">Low</option>
                             <option id="EditPriority2" value="1">Normal</option>
                             <option id="EditPriority3" value="2">High</option>
                         </select>
                         <br />
-                        <div class="d-inline-block">
-                            <input type="text" value="idk" maxlength="25" class="rounded" id="EditDes" required asp-for="@Model.Description" />
+                        <div class="form-text d-inline-block mb-2">
+                            <label>Description</label>
+                            <input type="text" maxlength="25" class="rounded" id="EditDes" required asp-for="Description" />
                         </div>
-                        <div class="d-inline-block float-end">
-                            <input type="radio" name="SecretFeature" class="fs-3" />
-                            <input type="radio" name="SecretFeature" class="fs-3" />
-                            <input type="radio" name="SecretFeature" class="fs-3" />
+                        <div class="d-block">
+                            <label>Deadline</label>
+                            <input class="mb-3" id="EditDeadline" type="date" data-date-format="DD MMMM YYYY" asp-for="DeadLine" value="@DateTime.Today.ToString("yyyy-MM-dd")" min="@DateTime.Today.ToShortDateString()" asp-for="DeadLine" />
+                            <select asp-for="Completed" class="form-select float-end" asp-for="Completed">
+                                <option value="false">Uncompleted</option>
+                                <option value="true">Completed</option>
+                            </select>
                         </div>
-                        <input type="datetime" asp-for="DeadLine" />
                     </div>
 
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <input type="submit" class="btn btn-primary mt-2" asp-page-handler="Edit" />
+                        <input type="submit" value="Done" class="btn btn-primary mt-2" asp-page-handler="Edit" />
                     </div>
 
                 </div>
@@ -193,19 +323,34 @@
 
     function BSData(pri, des, dead, guid) {
         document.getElementById('EditDes').value = des;
+        document.getElementById('EditID').value = guid;
+        document.getElementById('EditDeadline').value = dead;
+
         let select = document.getElementById('EditSelect');
 
         if (pri == 'Low')
             select.value = '0'
-        else if (pri == 'Normal') 
+        else if (pri == 'Normal')
             select.value = '1'
-        else 
+        else
             select.value = '2'
-        
-
     }
 
-    function L() {
-
+    function FilterTables(filter){
+        if (filter == 1) {
+            document.getElementById('tableAll').style.display = 'none';
+            document.getElementById('tableTodo').style.display = 'none';
+            document.getElementById('tableDone').style.display = '';
+        }
+        else if (filter == 2) {
+            document.getElementById('tableAll').style.display = 'none';
+            document.getElementById('tableTodo').style.display = '';
+            document.getElementById('tableDone').style.display = 'none';
+        }
+        else if (filter == 3) {
+            document.getElementById('tableAll').style.display = '';
+            document.getElementById('tableTodo').style.display = 'none';
+            document.getElementById('tableDone').style.display = 'none';
+        }
     }
 </script>

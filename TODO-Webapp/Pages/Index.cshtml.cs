@@ -4,6 +4,8 @@ using TODO_Webapp.Service.Interface;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using TODO_Webapp.Model;
+using Microsoft.AspNetCore.Http;
+using System.Globalization;
 
 namespace TODO_Webapp.Pages
 {
@@ -18,8 +20,7 @@ namespace TODO_Webapp.Pages
         [BindProperty]
         public bool Completed { get; set; }
         [BindProperty, Required]
-        public DateTime DeadLine { get; set; }
-
+        public DateTime DeadLine { get; }
         public List<ToDo> ToDos { get; set; }
 
         private readonly IRepo _repo;
@@ -32,19 +33,23 @@ namespace TODO_Webapp.Pages
 
         public void OnGet()
         {
-            _repo.CreateToDo("somting", DateTime.Today.Date, Priority.Low);
-            _repo.CreateToDo("somting", DateTime.Today.Date, Priority.Normal);
-            _repo.CreateToDo("somting", DateTime.Today.Date, Priority.High);
+
         }
 
         public IActionResult OnPostNew()
         {
+            if (ModelState.IsValid)
+            {
                 _repo.CreateToDo(Description, DateTime.Today.Date, Priority);
-                return RedirectToPage();
+            }
+            return RedirectToPage();
         }
         public void OnPostEdit()
         {
-            _repo.UpdateToDo(Guid, Description, DeadLine, Priority, Completed);
+            if (ModelState.IsValid)
+            {
+                _repo.UpdateToDo(Guid, Description, DeadLine, Priority, Completed);
+            }
         }
         public IActionResult OnPostComplete()
         {
