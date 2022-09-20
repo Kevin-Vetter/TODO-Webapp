@@ -53,7 +53,7 @@ ToDo is a razor page project for a final assignment where you can make todo task
 ### [V0.4](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V0.4) Features:
 * Page for updating tasks
 
-### [V0.3](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V.3) Features:
+### [V0.03](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V.3) Features:
 * Page for creating tasks
 
 ### [V0.2](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V0.2) Features:
