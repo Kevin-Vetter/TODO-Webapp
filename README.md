@@ -55,7 +55,7 @@ Press the 'new' button on the page to get started, if you see no task, try using
 ### [V0.4](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V0.4) Features:
 * Started on edit
 
-### [V0.03](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V.3) Features:
+### [V0.3](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V.3) Features:
 * Made it pretty :D
 
 ### [V0.2](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V0.2) Features:
