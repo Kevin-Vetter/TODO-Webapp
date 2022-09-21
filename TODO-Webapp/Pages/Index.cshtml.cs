@@ -62,5 +62,11 @@ namespace TODO_Webapp.Pages
             // HACK: there must be a better way
             return RedirectToPage();
         }
+
+        public IActionResult OnPostDeleteCompleted()
+        {
+            _repo.DeleteCompleted();
+            return RedirectToPage();
+        }
     }
 }

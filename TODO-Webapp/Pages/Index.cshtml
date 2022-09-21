@@ -5,15 +5,11 @@
 }
 <body>
 
-    <div class="text-center">
-        <h1 class="display-4">Welcome</h1>
-        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    </div>
 
-    <div class="d-flex justify-content-around mb-3">
+    <div class="d-flex justify-content-around mt-5 mb-5">
 
         <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" >
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off">
             <label class="btn btn-outline-primary" onclick="FilterTables('1')" for="btnradio1">Done</label>
 
             <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" checked>
@@ -23,10 +19,15 @@
             <label class="btn btn-outline-primary" onclick="FilterTables('3')" for="btnradio3">All</label>
         </div>
 
-        <div class="align-self-center">
+        <div class="d-flex">
             <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#myModal">
                 New
             </button>
+            <form method="post">
+                <button type="submit" asp-page-handler="DeleteCompleted" class="btn btn-danger">
+                    Delete completed
+                </button>
+            </form>
         </div>
         <div></div>
         <div></div>
@@ -96,7 +97,7 @@
             }
         </tbody>
     </table>
-    <table class="table table-hover row-cols-3 align-items-center" id="tableTodo" >
+    <table class="table table-hover row-cols-3 align-items-center" id="tableTodo">
         <thead>
             <tr>
                 <th>Importance</th>
@@ -246,7 +247,7 @@
                         <br />
                         <div class="d-inline-block">
                             <label>Description</label>
-                            <input type="hidden" asp-for="Guid" value="guid"/>
+                            <input type="hidden" asp-for="Guid" value="guid" />
                             <input type="text" class="mb-3" maxlength="25" class="rounded" required asp-for="@Model.Description" />
 
                         </div>
@@ -336,7 +337,7 @@
             select.value = '2'
     }
 
-    function FilterTables(filter){
+    function FilterTables(filter) {
         if (filter == 1) {
             document.getElementById('tableAll').style.display = 'none';
             document.getElementById('tableTodo').style.display = 'none';

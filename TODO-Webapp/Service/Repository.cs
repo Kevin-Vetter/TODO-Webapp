@@ -75,5 +75,13 @@ namespace TODO_Webapp.Service.Interface
             DeleteToDo(guid);
             _toDos.Add(idk with { IsCompleted = true });
         }
+
+        /// <summary>
+        /// Removes all completed tasks
+        /// </summary>
+        public void DeleteCompleted()
+        {
+            _toDos.RemoveAll(t => t.IsCompleted);
+        }
     }
 }
