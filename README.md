@@ -23,13 +23,14 @@ Press the 'new' button on the page to get started, if you see no task, try using
 * [x] Validation on inputs 
 * [x] Sorted tasks by created
 * [x] Cool UI
-* [ ] Delete all completed todos
+* [x] Delete all completed todos
 * [ ] Multiple laguage choices
 
 ## Instructions
 
 
 ## Tags
+* [V1.1](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V1.1)
 * [V1.0](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V1.0)
 * [V0.6](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V0.6)
 * [V0.5](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V0.5)
@@ -40,6 +41,9 @@ Press the 'new' button on the page to get started, if you see no task, try using
 
 
 ## Changelog
+
+### [V1.1](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V1.1) Features:
+* Delete all completed todos
 
 ### [V1.0](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V1.0) Features:
 * First Release
@@ -66,4 +70,3 @@ Press the 'new' button on the page to get started, if you see no task, try using
 
 # To-do
 * Do dk-DK option
-* Delete all from list feature
