@@ -34,7 +34,7 @@ Press the 'new' button on the page to get started, if you see no task, try using
 * [V0.6](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V0.6)
 * [V0.5](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V0.5)
 * [V0.4](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V0.4)
-* [V. 3](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V.3)
+* [V.03](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V.3)
 * [V0.2](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V0.2)
 * [V0.1](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V0.1)
 
