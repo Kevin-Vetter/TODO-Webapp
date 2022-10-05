@@ -18,20 +18,14 @@ namespace TODO_Webapp.Service.Interface
         /// <param name="description"></param>
         /// <param name="created"></param>
         /// <param name="priority"></param>
-        public void CreateToDo(string description, Priority priority)
-        {
-            _toDos.Add(new ToDo("", description, priority));
-        }
+        public void CreateToDo(string description, Priority priority) => _toDos.Add(new ToDo("", description, priority));
 
         /// <summary>
         /// Get a todo by an id
         /// </summary>
         /// <param name="id"></param>
         /// <returns>object of ToDo</returns>
-        public ToDo GetToDoById(string id) 
-        {
-                return _toDos.First(t => t.Id == id);
-        }
+        public ToDo GetToDoById(string id) => _toDos.First(t => t.Id == id);
 
         /// <summary>
         /// Gets All ToDos
@@ -56,10 +50,8 @@ namespace TODO_Webapp.Service.Interface
         /// Delete a ToDo
         /// </summary>
         /// <param name="guid"></param>
-        public void DeleteToDo(string guid)
-        {
-            _toDos.Remove(GetToDoById(guid));
-        }
+        public void DeleteToDo(string guid) => _toDos.Remove(GetToDoById(guid));
+
 
         /// <summary>
         /// Set a ToDo to completed
@@ -71,9 +63,10 @@ namespace TODO_Webapp.Service.Interface
             DeleteToDo(guid);
             _toDos.Add(idk with { IsCompleted = true });
         }
-        public User GetUser(string username)
-        {
-            return _dataAccess.GetUser(username);
-        }
+
+        public void DeleteCompleted() => _toDos.RemoveAll(x => x.IsCompleted);
+
+        public User GetUser(string username) => _dataAccess.GetUser(username);
+
     }
 }

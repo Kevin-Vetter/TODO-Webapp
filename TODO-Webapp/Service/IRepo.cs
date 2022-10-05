@@ -10,6 +10,7 @@ namespace TODO_Webapp.Service.Interface
         ToDo GetToDoById(string id);
         void UpdateToDo(string guid, string description, Priority priority, bool completed);
         void CompleteToDo(string guid);
+        void DeleteCompleted();
         User GetUser(string username);
     }
 }

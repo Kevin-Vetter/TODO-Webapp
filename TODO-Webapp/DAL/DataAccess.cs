@@ -21,16 +21,18 @@ namespace TODO_Webapp.DAL
         }
         public User GetUser(string username)
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new(connectionString))
             {
-                SqlCommand cmd = new SqlCommand("GetUser", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
+                SqlCommand cmd = new("GetUser", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 cmd.Parameters.AddWithValue("@Username", username);
                 conn.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    User user = new User()
+                    User user = new()
                     {
                         ID = reader.GetInt32("UserID"),
                         FirstName = reader.GetString("FirstName"),

@@ -42,12 +42,14 @@ namespace TODO_Webapp.Pages
             }
             return RedirectToPage();
         }
-        public void OnPostEdit()
+        public IActionResult OnPostEdit()
         {
             if (ModelState.IsValid)
             {
                 _repo.UpdateToDo(Guid, Description, Priority, Completed);
+                return RedirectToPage();
             }
+            return Page();
         }
         public IActionResult OnPostComplete()
         {

@@ -19,15 +19,19 @@
             <label class="btn btn-outline-primary" onclick="FilterTables('3')" for="btnradio3">All</label>
         </div>
 
-        <div class="d-flex">
-            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#myModal">
-                New
-            </button>
-            <form method="post">
-                <button type="submit" asp-page-handler="DeleteCompleted" class="btn btn-danger">
-                    Delete completed
+        <div class="d-flex justify-content-center gap-1">
+            <div>
+                <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#myModal">
+                    New
                 </button>
-            </form>
+            </div>
+            <div>
+                <form method="post">
+                    <button type="submit" asp-page-handler="DeleteCompleted" class="btn btn-danger">
+                        Delete completed
+                    </button>
+                </form>
+            </div>
         </div>
         <div></div>
         <div></div>
@@ -89,7 +93,7 @@
                                 <input class="form-check-input rounded d-inline-block" asp-page-handler="Delete" id="DeleteBtn_@i" src="/sources/Delete.png" onmouseover="UnFilter('DeleteBtn_@i')" onmouseout="Filter('DeleteBtn_@i')" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="submit" />
                             </form>
                             <form onsubmit="return false;" class="form-check-inline">
-                                <input class="form-check-input rounded d-inline-block" data-bs-toggle="modal" data-bs-target="#EditModal" onclick="('@Model.ToDos[i].Importance', '@Model.ToDos[i].Description',@Model.ToDos[i].Created.ToShortDateString(), '@Model.ToDos[i].Id')" id="EditBtn_@i" onmouseover="UnFilter('EditBtn_@i')" onmouseout="Filter('EditBtn_@i')" src="/sources/Edit.png" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="button" />
+                                <input class="form-check-input rounded d-inline-block" data-bs-toggle="modal" data-bs-target="#EditModal" onclick="('@Model.ToDos[i].Importance', '@Model.ToDos[i].Description', '@Model.ToDos[i].Id')" id="EditBtn_@i" onmouseover="UnFilter('EditBtn_@i')" onmouseout="Filter('EditBtn_@i')" src="/sources/Edit.png" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="button" />
                             </form>
                         </div>
                     </td>
@@ -154,7 +158,7 @@
                                     <input class="form-check-input rounded d-inline-block" asp-page-handler="Delete" id="DeleteBtn_@i" src="/sources/Delete.png" onmouseover="UnFilter('DeleteBtn_@i')" onmouseout="Filter('DeleteBtn_@i')" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="submit" />
                                 </form>
                                 <form onsubmit="return false;" class="form-check-inline">
-                                    <input class="form-check-input rounded d-inline-block" data-bs-toggle="modal" data-bs-target="#EditModal" onclick="BSData('@Model.ToDos[i].Importance', '@Model.ToDos[i].Description',@Model.ToDos[i].Created.ToShortDateString(), '@Model.ToDos[i].Id')" id="EditBtn_@i" onmouseover="UnFilter('EditBtn_@i')" onmouseout="Filter('EditBtn_@i')" src="/sources/Edit.png" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="button" />
+                                    <input class="form-check-input rounded d-inline-block" data-bs-toggle="modal" data-bs-target="#EditModal" onclick="BSData('@Model.ToDos[i].Importance', '@Model.ToDos[i].Description', '@Model.ToDos[i].Id')" id="EditBtn_@i" onmouseover="UnFilter('EditBtn_@i')" onmouseout="Filter('EditBtn_@i')" src="/sources/Edit.png" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="button" />
                                 </form>
                             </div>
                         </td>
@@ -220,7 +224,7 @@
                                     <input class="form-check-input rounded d-inline-block" asp-page-handler="Delete" id="DeleteBtn_@i" src="/sources/Delete.png" onmouseover="UnFilter('DeleteBtn_@i')" onmouseout="Filter('DeleteBtn_@i')" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="submit" />
                                 </form>
                                 <form onsubmit="return false;" class="form-check-inline">
-                                    <input class="form-check-input rounded d-inline-block" data-bs-toggle="modal" data-bs-target="#EditModal" onclick="BSData('@Model.ToDos[i].Importance', '@Model.ToDos[i].Description',@Model.ToDos[i].Created.ToShortDateString(), '@Model.ToDos[i].Id')" id="EditBtn_@i" onmouseover="UnFilter('EditBtn_@i')" onmouseout="Filter('EditBtn_@i')" src="/sources/Edit.png" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="button" />
+                                    <input class="form-check-input rounded d-inline-block" data-bs-toggle="modal" data-bs-target="#EditModal" onclick="BSData('@Model.ToDos[i].Importance', '@Model.ToDos[i].Description', '@Model.ToDos[i].Id')" id="EditBtn_@i" onmouseover="UnFilter('EditBtn_@i')" onmouseout="Filter('EditBtn_@i')" src="/sources/Edit.png" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="button" />
                                 </form>
                             </div>
                         </td>
