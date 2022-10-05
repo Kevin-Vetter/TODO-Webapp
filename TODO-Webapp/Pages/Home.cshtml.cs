@@ -19,8 +19,6 @@ namespace TODO_Webapp.Pages
         public string Guid { get; set; }
         [BindProperty]
         public bool Completed { get; set; }
-        [BindProperty, Required]
-        public DateTime DeadLine { get; }
         public List<ToDo> ToDos { get; set; }
 
         private readonly IRepo _repo;
@@ -40,7 +38,7 @@ namespace TODO_Webapp.Pages
         {
             if (ModelState.IsValid)
             {
-                _repo.CreateToDo(Description, DateTime.Today.Date, Priority);
+                _repo.CreateToDo(Description, Priority);
             }
             return RedirectToPage();
         }
@@ -48,7 +46,7 @@ namespace TODO_Webapp.Pages
         {
             if (ModelState.IsValid)
             {
-                _repo.UpdateToDo(Guid, Description, DeadLine, Priority, Completed);
+                _repo.UpdateToDo(Guid, Description, Priority, Completed);
             }
         }
         public IActionResult OnPostComplete()
@@ -59,7 +57,6 @@ namespace TODO_Webapp.Pages
         public IActionResult OnPostDelete()
         {
             _repo.DeleteToDo(Guid);
-            // HACK: there must be a better way
             return RedirectToPage();
         }
     }

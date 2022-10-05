@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "/Home"
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
@@ -38,7 +38,7 @@
             <tr>
                 <th>Importance</th>
                 <th>Description</th>
-                <th>Deadline</th>
+                <th>Created</th>
                 <th>Controls</th>
             </tr>
         </thead>
@@ -65,7 +65,7 @@
                         @Model.ToDos[i].Description
                     </td>
                     <td>
-                        @Model.ToDos[i].Deadline.ToShortDateString()
+                        @Model.ToDos[i].Created.ToShortDateString()
                     </td>
                     <td class="texc">
                         <div>
@@ -88,7 +88,7 @@
                                 <input class="form-check-input rounded d-inline-block" asp-page-handler="Delete" id="DeleteBtn_@i" src="/sources/Delete.png" onmouseover="UnFilter('DeleteBtn_@i')" onmouseout="Filter('DeleteBtn_@i')" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="submit" />
                             </form>
                             <form onsubmit="return false;" class="form-check-inline">
-                                <input class="form-check-input rounded d-inline-block" data-bs-toggle="modal" data-bs-target="#EditModal" onclick="BSData('@Model.ToDos[i].Importance', '@Model.ToDos[i].Description',@Model.ToDos[i].Deadline.ToShortDateString(), '@Model.ToDos[i].Id')" id="EditBtn_@i" onmouseover="UnFilter('EditBtn_@i')" onmouseout="Filter('EditBtn_@i')" src="/sources/Edit.png" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="button" />
+                                <input class="form-check-input rounded d-inline-block" data-bs-toggle="modal" data-bs-target="#EditModal" onclick="('@Model.ToDos[i].Importance', '@Model.ToDos[i].Description',@Model.ToDos[i].Created.ToShortDateString(), '@Model.ToDos[i].Id')" id="EditBtn_@i" onmouseover="UnFilter('EditBtn_@i')" onmouseout="Filter('EditBtn_@i')" src="/sources/Edit.png" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="button" />
                             </form>
                         </div>
                     </td>
@@ -101,7 +101,7 @@
             <tr>
                 <th>Importance</th>
                 <th>Description</th>
-                <th>Deadline</th>
+                <th>Created</th>
                 <th>Controls</th>
             </tr>
         </thead>
@@ -130,7 +130,7 @@
                             @Model.ToDos[i].Description
                         </td>
                         <td>
-                            @Model.ToDos[i].Deadline.ToShortDateString()
+                            @Model.ToDos[i].Created.ToShortDateString()
                         </td>
                         <td class="texc">
                             <div>
@@ -153,7 +153,7 @@
                                     <input class="form-check-input rounded d-inline-block" asp-page-handler="Delete" id="DeleteBtn_@i" src="/sources/Delete.png" onmouseover="UnFilter('DeleteBtn_@i')" onmouseout="Filter('DeleteBtn_@i')" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="submit" />
                                 </form>
                                 <form onsubmit="return false;" class="form-check-inline">
-                                    <input class="form-check-input rounded d-inline-block" data-bs-toggle="modal" data-bs-target="#EditModal" onclick="BSData('@Model.ToDos[i].Importance', '@Model.ToDos[i].Description',@Model.ToDos[i].Deadline.ToShortDateString(), '@Model.ToDos[i].Id')" id="EditBtn_@i" onmouseover="UnFilter('EditBtn_@i')" onmouseout="Filter('EditBtn_@i')" src="/sources/Edit.png" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="button" />
+                                    <input class="form-check-input rounded d-inline-block" data-bs-toggle="modal" data-bs-target="#EditModal" onclick="BSData('@Model.ToDos[i].Importance', '@Model.ToDos[i].Description',@Model.ToDos[i].Created.ToShortDateString(), '@Model.ToDos[i].Id')" id="EditBtn_@i" onmouseover="UnFilter('EditBtn_@i')" onmouseout="Filter('EditBtn_@i')" src="/sources/Edit.png" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="button" />
                                 </form>
                             </div>
                         </td>
@@ -167,7 +167,7 @@
             <tr>
                 <th>Importance</th>
                 <th>Description</th>
-                <th>Deadline</th>
+                <th>Created</th>
                 <th>Controls</th>
             </tr>
         </thead>
@@ -196,7 +196,7 @@
                             @Model.ToDos[i].Description
                         </td>
                         <td>
-                            @Model.ToDos[i].Deadline.ToShortDateString()
+                            @Model.ToDos[i].Created.ToShortDateString()
                         </td>
                         <td class="texc">
                             <div>
@@ -219,7 +219,7 @@
                                     <input class="form-check-input rounded d-inline-block" asp-page-handler="Delete" id="DeleteBtn_@i" src="/sources/Delete.png" onmouseover="UnFilter('DeleteBtn_@i')" onmouseout="Filter('DeleteBtn_@i')" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="submit" />
                                 </form>
                                 <form onsubmit="return false;" class="form-check-inline">
-                                    <input class="form-check-input rounded d-inline-block" data-bs-toggle="modal" data-bs-target="#EditModal" onclick="BSData('@Model.ToDos[i].Importance', '@Model.ToDos[i].Description',@Model.ToDos[i].Deadline.ToShortDateString(), '@Model.ToDos[i].Id')" id="EditBtn_@i" onmouseover="UnFilter('EditBtn_@i')" onmouseout="Filter('EditBtn_@i')" src="/sources/Edit.png" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="button" />
+                                    <input class="form-check-input rounded d-inline-block" data-bs-toggle="modal" data-bs-target="#EditModal" onclick="BSData('@Model.ToDos[i].Importance', '@Model.ToDos[i].Description',@Model.ToDos[i].Created.ToShortDateString(), '@Model.ToDos[i].Id')" id="EditBtn_@i" onmouseover="UnFilter('EditBtn_@i')" onmouseout="Filter('EditBtn_@i')" src="/sources/Edit.png" style="font-size:xx-large; filter:grayscale(100%)" type="image" alt="button" />
                                 </form>
                             </div>
                         </td>
@@ -234,27 +234,30 @@
         <div class="modal" id="myModal">
             <div class="modal-dialog">
                 <div class="modal-content">
-
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <label>Priority</label>
-                        <select class="form-select" asp-for="Priority">
-                            <option value="0">Low</option>
-                            <option value="1" selected>Normal</option>
-                            <option value="2">High</option>
-                        </select>
                         <br />
-                        <div class="d-inline-block">
-                            <label>Description</label>
-                            <input type="hidden" asp-for="Guid" value="guid"/>
-                            <input type="text" class="mb-3" maxlength="25" class="rounded" required asp-for="@Model.Description" />
-
+                        <div class="d-flex justify-content-start gap-3 col-12">
+                            <div class="col-4">
+                                <label>Title</label>
+                                <input type="text" class="form-control" maxlength="25" required asp-for="@Model.Description" />
+                            </div>
+                            <div class="col-7">
+                                <label>Description</label>
+                                <input type="text" class="form-control" maxlength="25" required asp-for="@Model.Description" />
+                                <input type="hidden" asp-for="Guid" value="guid"/>
+                            </div>
                         </div>
-                        <div>
-                            <label>Deadline</label>
-                            <input type="date" asp-for="DeadLine" value="@DateTime.Today.ToString("yyyy-MM-dd")" min="@DateTime.Today.ToString("yyyy-MM-dd")" asp-for="DeadLine" />
+                        <div class="d-flex justify-content-start gap-3 col-12">
+                            <div class="col-4">
+                                <label>Priority</label>
+                                <select class="form-select" asp-for="Priority">
+                                    <option value="0">Low</option>
+                                    <option value="1" selected>Normal</option>
+                                    <option value="2">High</option>
+                                </select>
+                            </div>
                         </div>
-
                     </div>
 
                     <!-- Modal footer -->
@@ -264,8 +267,6 @@
 
                 </div>
             </div>
-        </div>
-        <div class="col text-center">
         </div>
     </form>
 
@@ -287,14 +288,6 @@
                         <div class="form-text d-inline-block mb-2">
                             <label>Description</label>
                             <input type="text" maxlength="25" class="rounded" id="EditDes" required asp-for="Description" />
-                        </div>
-                        <div class="d-block">
-                            <label>Deadline</label>
-                            <input class="mb-3" id="EditDeadline" type="date" data-date-format="DD MMMM YYYY" asp-for="DeadLine" value="@DateTime.Today.ToString("yyyy-MM-dd")" min="@DateTime.Today.ToShortDateString()" asp-for="DeadLine" />
-                            <select asp-for="Completed" class="form-select float-end" asp-for="Completed">
-                                <option value="false">Uncompleted</option>
-                                <option value="true">Completed</option>
-                            </select>
                         </div>
                     </div>
 
@@ -321,10 +314,10 @@
         element.style.filter = 'grayscale(100%)'
     }
 
-    function BSData(pri, des, dead, guid) {
+    function BSData(pri, des, guid) {
         document.getElementById('EditDes').value = des;
         document.getElementById('EditID').value = guid;
-        document.getElementById('EditDeadline').value = dead;
+
 
         let select = document.getElementById('EditSelect');
 
