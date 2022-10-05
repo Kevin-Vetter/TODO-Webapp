@@ -59,5 +59,11 @@ namespace TODO_Webapp.Pages
             _repo.DeleteToDo(Guid);
             return RedirectToPage();
         }
+
+        public IActionResult OnPostDeleteCompleted()
+        {
+            _repo.DeleteCompleted();
+            return RedirectToPage();
+        }
     }
 }

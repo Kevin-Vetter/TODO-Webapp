@@ -10,55 +10,60 @@
 
 
 ## Intro
-ToDo is a razor page project for a final assignment where you can make todo tasks and complete them
+ToDo-Webapp is a razor page web application, where  a user can create tasks with various priorities and deadlines 
+
+## Instructions 
+Press the 'new' button on the page to get started, if you see no task, try using a different filter by clicking the buttons on the left 
 
 ## Requirements
-<ul>
-  <li>CRUD</li> [x] 
-  <li>Show all todo tasks</li> [x] 
-  <li>Show all completed tasks</li> [x] 
-  <li>Delete all completed tasks</li> [ ] 
-  <li>Validation on inputs</li>[x] 
-  <li>Multiple laguage choices</li>[ ] 
-  <li>Sorted tasks by created</li>[x] 
-  <li>Cool UI</li>[x]
-</ul>
+
+* [x] CRUD
+* [x] Show all todos
+* [x] Show all completed todos
+* [x] Validation on inputs 
+* [x] Sorted tasks by created
+* [x] Cool UI
+* [x] Delete all completed todos
+* [ ] Multiple laguage choices
 
 ## Instructions
 
 
 ## Tags
+* [V1.1](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V1.1)
 * [V1.0](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V1.0)
 * [V0.6](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V0.6)
 * [V0.5](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V0.5)
 * [V0.4](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V0.4)
-* [V. 3](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V.3)
+* [V0.3](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V.3)
 * [V0.2](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V0.2)
 * [V0.1](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V0.1)
 
 
 ## Changelog
 
+### [V1.1](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V1.1) Features:
+* Delete all completed todos
+
 ### [V1.0](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V1.0) Features:
-* Edit 
-* Sorting
+* First Release
+* Edit now works :D
+* Sorting by date created
 
 ### [V0.6](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V0.6) Features:
-* Validation
+* New and improved complete todo feature
 
 ### [V0.5](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V0.5) Features:
-* Switched to Single Page Application
-* Complete tasks feature
+* Complete todo 
 
 ### [V0.4](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V0.4) Features:
-* Page for updating tasks
+* Started on edit
 
 ### [V0.3](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V.3) Features:
-* Page for creating tasks
+* Made it pretty :D
 
 ### [V0.2](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V0.2) Features:
-* Tasks are displayed
-* Basic CRUD in repo
+* Quick list feature & Delete
 
 ### [V0.1](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V0.1) Features:
 * Project created
