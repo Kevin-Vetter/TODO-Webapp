@@ -9,7 +9,7 @@ using System.Globalization;
 
 namespace TODO_Webapp.Pages
 {
-    public class IndexModel : PageModel
+    public class HomeModel : PageModel
     {
         [BindProperty, MaxLength(25, ErrorMessage = "Max 25 chars"), Required]
         public string Description { get; set; }
@@ -23,7 +23,7 @@ namespace TODO_Webapp.Pages
 
         private readonly IRepo _repo;
 
-        public IndexModel(IRepo repo)
+        public HomeModel(IRepo repo)
         {
             _repo = repo;
             ToDos = _repo.GetAllToDos();

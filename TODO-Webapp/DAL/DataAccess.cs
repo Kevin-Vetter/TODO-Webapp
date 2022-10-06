@@ -19,6 +19,9 @@ namespace TODO_Webapp.DAL
             Configuration = builder.Build();
             connectionString = Configuration.GetConnectionString("DefaultConnection");
         }
+
+
+        #region user
         public User GetUser(string username)
         {
             using (SqlConnection conn = new(connectionString))
@@ -28,22 +31,42 @@ namespace TODO_Webapp.DAL
                     CommandType = CommandType.StoredProcedure
                 };
                 cmd.Parameters.AddWithValue("@Username", username);
-                conn.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+                try
                 {
-                    User user = new()
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
                     {
-                        ID = reader.GetInt32("UserID"),
-                        FirstName = reader.GetString("FirstName"),
-                        LastName = reader.GetString("LastName"),
-                        Username = reader.GetString("Username"),
-                        Password = reader.GetString("Password")
-                    };
-                    return user;
+                        User user = new()
+                        {
+                            ID = reader.GetInt32("UserID"),
+                            FirstName = reader.GetString("FirstName"),
+                            LastName = reader.GetString("LastName"),
+                            Username = reader.GetString("Username"),
+                            Password = reader.GetString("Password")
+                        };
+                        if (user == null)
+                            throw new UserNotFoundException($"No user with username: {username} exists.");
+                        else
+                            return user;
+                    }
+                    conn.Close();
+                }
+                catch (UserNotFoundException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                finally
+                {
+                    conn.Close();
                 }
             };
-            throw new UserNotFoundException($"No user with username: {username} exists.");
+            throw new Exception("Shiiiiiiiit");
         }
+        #endregion
     }
 }

@@ -68,5 +68,11 @@ namespace TODO_Webapp.Service.Interface
 
         public User GetUser(string username) => _dataAccess.GetUser(username);
 
+        public bool LogIn(string username, string password)
+        {
+
+        }
+
+
     }
 }
