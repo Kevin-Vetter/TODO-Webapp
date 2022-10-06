@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages().Services.AddSingleton<IRepo, Repository>().AddMvc().AddRazorPagesOptions(options =>
 {
     options.Conventions.AddPageRoute("/Login","");
-});
+}).Services.AddSession(options => options.IdleTimeout = TimeSpan.FromMinutes(30));
 
 var app = builder.Build();
 
@@ -19,7 +19,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-
+app.UseSession();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

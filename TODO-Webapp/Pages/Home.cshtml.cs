@@ -29,9 +29,12 @@ namespace TODO_Webapp.Pages
             ToDos = _repo.GetAllToDos();
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
-
+            if (HttpContext.Session.GetString("LoggedIn") != "true")
+                return RedirectToPage("/LogIn");
+            else
+                return Page();
         }
 
         public IActionResult OnPostNew()

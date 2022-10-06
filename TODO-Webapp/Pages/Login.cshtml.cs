@@ -22,13 +22,21 @@ namespace TODO_Webapp.Pages
 
         public void OnGet()
         {
+            HttpContext.Session.SetString("LoggedIn", "false");
+            HttpContext.Session.Remove("UserID");
         }
         public IActionResult OnPost()
         {
             if (ModelState.IsValid)
             {
-                if(_repo.LogIn(Username, Password));
-                return RedirectToPage("/Home");
+                int ID = _repo.LogIn(Username, Password);
+                if (ID != 0)
+                {
+                    HttpContext.Session.SetInt32("UserID", ID);
+                    HttpContext.Session.SetString("LoggedIn", "true");
+                    return RedirectToPage("/Home");
+                }
+
             }
             return Page();
         }

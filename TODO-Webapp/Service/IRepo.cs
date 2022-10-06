@@ -16,7 +16,7 @@ namespace TODO_Webapp.Service.Interface
 
 
         #region User
-            bool LogIn(string username, string password);
+            int LogIn(string username, string password);
             User GetUser(string username);
         #endregion
     }

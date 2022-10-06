@@ -41,9 +41,10 @@ namespace TODO_Webapp.Service.Interface
         /// <param name="created"></param>
         /// <param name="priority"></param>
         /// <param name="completed"></param>
-        public void UpdateToDo(string guid, string description, Priority priority, bool completed) {
+        public void UpdateToDo(string guid, string description, Priority priority, bool completed)
+        {
             DeleteToDo(guid);
-            _toDos.Add(new ToDo(guid ,description, completed, priority));
+            _toDos.Add(new ToDo(guid, description, completed, priority));
         }
 
         /// <summary>
@@ -68,9 +69,13 @@ namespace TODO_Webapp.Service.Interface
 
         public User GetUser(string username) => _dataAccess.GetUser(username);
 
-        public bool LogIn(string username, string password)
+        public int LogIn(string username, string password)
         {
-
+            User user = GetUser(username);
+            if (password == user.Password)
+                return user.ID;
+            else
+                return 0;
         }
 
 

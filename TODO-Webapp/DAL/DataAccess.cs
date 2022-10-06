@@ -65,7 +65,7 @@ namespace TODO_Webapp.DAL
                     conn.Close();
                 }
             };
-            throw new Exception("Shiiiiiiiit");
+            return null;
         }
         #endregion
     }
