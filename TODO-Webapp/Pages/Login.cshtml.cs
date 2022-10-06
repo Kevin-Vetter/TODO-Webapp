@@ -24,6 +24,7 @@ namespace TODO_Webapp.Pages
         {
             HttpContext.Session.SetString("LoggedIn", "false");
             HttpContext.Session.Remove("UserID");
+            _repo.ClearList();
         }
         public IActionResult OnPost()
         {

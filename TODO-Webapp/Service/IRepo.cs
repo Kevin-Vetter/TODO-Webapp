@@ -5,12 +5,15 @@ namespace TODO_Webapp.Service.Interface
     public interface IRepo
     {
         #region ToDos
-        void CreateToDo(string title, string description, Priority priority, int userId);
+        public void ClearList();
+        public void LoadList(int id);
+        void CreateToDo(string description, Priority priority, int userId, string party);
         void DeleteToDo(string guid);
         List<ToDo> GetAllToDosForUser(int UserID);
         ToDo GetToDoById(string id);
-        void UpdateToDo(string guid, string description, Priority priority, bool completed);
+        void UpdateToDo(string guid, string description, Priority priority);
         void CompleteToDo(string guid);
+        List<ToDo> GetLoadedToDos();
         void DeleteCompleted();
         #endregion
 

@@ -23,7 +23,37 @@ namespace TODO_Webapp.DAL
         }
 
         #region ToDo
-        public ToDo CreateToDo(Guid guid, string title, string description, Priority priority, int userId)
+
+        public void UpdateToDo(ToDo toDo)
+        {
+            using (SqlConnection conn = new(connectionString))
+            {
+                SqlCommand cmd = new("UpdateToDo", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.AddWithValue("@ToDoID", toDo.Id);
+                cmd.Parameters.AddWithValue("@Description", toDo.Description);
+                cmd.Parameters.AddWithValue("@Priority", (int)toDo.Importance);
+                try
+                {
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+
+        }
+
+
+        public ToDo CreateToDo(Guid guid, string description, Priority priority, int userId, string party)
         {
             using (SqlConnection conn = new(connectionString))
             {
@@ -32,7 +62,7 @@ namespace TODO_Webapp.DAL
                     CommandType = CommandType.StoredProcedure
                 };
                 cmd.Parameters.AddWithValue("@ToDoID", guid);
-                cmd.Parameters.AddWithValue("@Title", title);
+                cmd.Parameters.AddWithValue("@Title", "Not Implemented");
                 cmd.Parameters.AddWithValue("@Description", description);
                 cmd.Parameters.AddWithValue("@Created", DateTime.Today);
                 cmd.Parameters.AddWithValue("@Priority", priority);
@@ -42,7 +72,7 @@ namespace TODO_Webapp.DAL
                 {
                     conn.Open();
                     cmd.ExecuteNonQuery();
-
+                    conn.Close();
                     ToDo todo = new()
                     {
                         Id = guid.ToString(),
@@ -50,7 +80,23 @@ namespace TODO_Webapp.DAL
                         Created = DateTime.Today,
                         Importance = priority
                     };
+                    if (!string.IsNullOrWhiteSpace(party))
+                    {
 
+                        List<string> partyList = party.Split(',', StringSplitOptions.TrimEntries).ToList();
+                        partyList.ForEach(u =>
+                        {
+                            conn.Open();
+                            cmd = new("AddPartyMember", conn)
+                            {
+                                CommandType = CommandType.StoredProcedure
+                            };
+                            cmd.Parameters.AddWithValue("@ToDoID", guid);
+                            cmd.Parameters.AddWithValue("@Username", u);
+                            cmd.ExecuteNonQuery();
+                            conn.Close();
+                        });
+                    }
                     return todo;
                 }
                 catch (Exception e)
@@ -118,6 +164,31 @@ namespace TODO_Webapp.DAL
                 }
             };
             return toDos;
+        }
+
+        public void CompleteToDo(string guid)
+        {
+            using (SqlConnection conn = new(connectionString))
+            {
+                SqlCommand cmd = new("CompleteToDo", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.AddWithValue("@ToDoID", guid);
+                try
+                {
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            };
         }
 
         public void DisableToDo(string guid)
@@ -250,6 +321,8 @@ namespace TODO_Webapp.DAL
                 }
             };
         }
+
+
         #endregion
     }
 }

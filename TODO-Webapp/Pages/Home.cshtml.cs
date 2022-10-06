@@ -13,8 +13,6 @@ namespace TODO_Webapp.Pages
     {
         [BindProperty, MaxLength(25, ErrorMessage = "Max 25 chars"), Required]
         public string Description { get; set; }
-        [BindProperty, Required]
-        public string Title { get; set; }
         [BindProperty]
         public Priority Priority { get; set; }
         [BindProperty, Required]
@@ -39,7 +37,9 @@ namespace TODO_Webapp.Pages
                 return RedirectToPage("/LogIn");
             else
             {
-                ToDos = _repo.GetAllToDosForUser((int)HttpContext.Session.GetInt32("UserID"));
+                int id = (int)HttpContext.Session.GetInt32("UserID");
+                _repo.LoadList(id);
+                ToDos = _repo.GetLoadedToDos();
             }
             return Page();
         }
@@ -48,7 +48,7 @@ namespace TODO_Webapp.Pages
         {
             if (ModelState.IsValid)
             {
-                _repo.CreateToDo(Title, Description, Priority, (int)HttpContext.Session.GetInt32("UserID"));
+                _repo.CreateToDo(Description, Priority, (int)HttpContext.Session.GetInt32("UserID"), Participants);
             }
             return RedirectToPage();
         }
@@ -56,7 +56,7 @@ namespace TODO_Webapp.Pages
         {
             if (ModelState.IsValid)
             {
-                _repo.UpdateToDo(Guid, Description, Priority, Completed);
+                _repo.UpdateToDo(Guid, Description, Priority);
                 return RedirectToPage();
             }
             return Page();

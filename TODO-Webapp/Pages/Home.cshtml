@@ -13,7 +13,7 @@
             <label class="btn btn-outline-primary" onclick="FilterTables('1')" for="btnradio1">Done</label>
 
             <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" checked>
-            <label class="btn btn-outline-primary" onclick="FilterTables('2')" for="btnradio2">Uncompleted</label>
+            <label class="btn btn-outline-primary" onclick="FilterTables('2')" for="btnradio2">Incomplete</label>
 
             <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
             <label class="btn btn-outline-primary" onclick="FilterTables('3')" for="btnradio3">All</label>
@@ -42,7 +42,7 @@
         <thead>
             <tr>
                 <th>Importance</th>
-                <th>Description</th>
+                <th>Title</th>
                 <th>Created</th>
                 <th>Controls</th>
             </tr>
@@ -105,7 +105,7 @@
         <thead>
             <tr>
                 <th>Importance</th>
-                <th>Description</th>
+                <th>Title</th>
                 <th>Created</th>
                 <th>Controls</th>
             </tr>
@@ -171,7 +171,7 @@
         <thead>
             <tr>
                 <th>Importance</th>
-                <th>Description</th>
+                <th>Title</th>
                 <th>Created</th>
                 <th>Controls</th>
             </tr>
@@ -242,13 +242,9 @@
                     <!-- Modal body -->
                     <div class="modal-body">
                         <br />
-                        <div class="d-flex justify-content-start gap-3 col-12">
-                            <div class="col-4">
-                                <label>Title</label>
-                                <input type="text"  class="form-control" maxlength="25" required asp-for="@Model.Title" />
-                            </div>
+                        <div class="d-flex justify-content-start ">
                             <div class="col-7">
-                                <label>Description</label>
+                                <label>Title</label>
                                 <input type="text" class="form-control" maxlength="25" required asp-for="@Model.Description" />
                                 <input type="hidden" asp-for="Guid" value="guid"/>
                             </div>
@@ -295,8 +291,12 @@
                         </select>
                         <br />
                         <div class="form-text d-inline-block mb-2">
-                            <label>Description</label>
+                            <label>Title</label>
                             <input type="text" maxlength="25" class="rounded" id="EditDes" required asp-for="Description" />
+                            <div class="col-7">
+                                <label>Participants (separeted by ,)</label>
+                                <input type="text" asp-for="Participants" class="form-control" placeholder="User1,User2,User3,User4..." required="true" />
+                            </div>
                         </div>
                     </div>
 
