@@ -11,15 +11,17 @@ namespace TODO_Webapp.Service.Interface
 
 
 
-
+        #region ToDo
         /// <summary>
         /// Creates new todo
         /// </summary>
         /// <param name="description"></param>
         /// <param name="created"></param>
         /// <param name="priority"></param>
-        public void CreateToDo(string description, Priority priority) => _toDos.Add(new ToDo("", description, priority));
-
+        public void CreateToDo(string title, string description, Priority priority, int userId) 
+        {
+            _toDos.Add(_dataAccess.CreateToDo(Guid.NewGuid(), title, description, priority, userId));
+        }
         /// <summary>
         /// Get a todo by an id
         /// </summary>
@@ -31,7 +33,7 @@ namespace TODO_Webapp.Service.Interface
         /// Gets All ToDos
         /// </summary>
         /// <returns></returns>
-        public List<ToDo> GetAllToDos() => _toDos.OrderBy(t => t.Created).ToList();
+        public List<ToDo> GetAllToDosForUser(int UserID) => _dataAccess.GetUsersToDo(UserID);
 
         /// <summary>
         /// Update an existing ToDo
@@ -51,8 +53,7 @@ namespace TODO_Webapp.Service.Interface
         /// Delete a ToDo
         /// </summary>
         /// <param name="guid"></param>
-        public void DeleteToDo(string guid) => _toDos.Remove(GetToDoById(guid));
-
+        public void DeleteToDo(string guid) => _dataAccess.DisableToDo(guid);
 
         /// <summary>
         /// Set a ToDo to completed
@@ -66,6 +67,7 @@ namespace TODO_Webapp.Service.Interface
         }
 
         public void DeleteCompleted() => _toDos.RemoveAll(x => x.IsCompleted);
+        #endregion
 
         public User GetUser(string username) => _dataAccess.GetUser(username);
 
@@ -78,6 +80,9 @@ namespace TODO_Webapp.Service.Interface
                 return 0;
         }
 
-
+        public void SignUp(string firstName, string lastName, string username, string password)
+        {
+            _dataAccess.SignUp(firstName, lastName, username, password);
+        }
     }
 }

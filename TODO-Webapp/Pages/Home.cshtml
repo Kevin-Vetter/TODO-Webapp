@@ -245,7 +245,7 @@
                         <div class="d-flex justify-content-start gap-3 col-12">
                             <div class="col-4">
                                 <label>Title</label>
-                                <input type="text" class="form-control" maxlength="25" required asp-for="@Model.Description" />
+                                <input type="text"  class="form-control" maxlength="25" required asp-for="@Model.Title" />
                             </div>
                             <div class="col-7">
                                 <label>Description</label>
@@ -257,10 +257,14 @@
                             <div class="col-4">
                                 <label>Priority</label>
                                 <select class="form-select" asp-for="Priority">
-                                    <option value="0">Low</option>
-                                    <option value="1" selected>Normal</option>
-                                    <option value="2">High</option>
+                                    <option value="1">Low</option>
+                                    <option value="2" selected>Normal</option>
+                                    <option value="3">High</option>
                                 </select>
+                            </div>
+                            <div class="col-7">
+                                <label>Participants (separeted by ,)</label>
+                                <input type="text" asp-for="Participants" class="form-control" placeholder="User1,User2,User3,User4..." required="true"/>
                             </div>
                         </div>
                     </div>
@@ -285,9 +289,9 @@
                     <div class="modal-body">
                         <input type="hidden" id="EditID" asp-for="Guid" />
                         <select class="form-select" id="EditSelect" asp-for="Priority">
-                            <option id="EditPriority1" value="0">Low</option>
-                            <option id="EditPriority2" value="1">Normal</option>
-                            <option id="EditPriority3" value="2">High</option>
+                            <option id="EditPriority1" value="1">Low</option>
+                            <option id="EditPriority2" value="2">Normal</option>
+                            <option id="EditPriority3" value="3">High</option>
                         </select>
                         <br />
                         <div class="form-text d-inline-block mb-2">

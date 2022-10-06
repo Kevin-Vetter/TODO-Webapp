@@ -29,14 +29,20 @@ namespace TODO_Webapp.Pages
         {
             if (ModelState.IsValid)
             {
-                int ID = _repo.LogIn(Username, Password);
-                if (ID != 0)
+                try
                 {
-                    HttpContext.Session.SetInt32("UserID", ID);
-                    HttpContext.Session.SetString("LoggedIn", "true");
-                    return RedirectToPage("/Home");
+                    int ID = _repo.LogIn(Username, Password);
+                    if (ID != 0)
+                    {
+                        HttpContext.Session.SetInt32("UserID", ID);
+                        HttpContext.Session.SetString("LoggedIn", "true");
+                        return RedirectToPage("/Home");
+                    }
                 }
+                catch (Exception)
+                {
 
+                }
             }
             return Page();
         }

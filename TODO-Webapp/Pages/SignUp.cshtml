@@ -10,33 +10,31 @@
                     <div class="card" style="border-radius: 15px;">
                         <div class="card-body p-4">
                             <h2 class="text-uppercase text-center mb-3">Create an account</h2>
-                            <form>
+                            <form method="post">
                                 <div class="d-flex justify-content-center row">
                                     <div class="form-outline col-6 mb-2">
                                         <label class="form-label">First Name</label>
-                                        <input type="text" class="form-control" />
+                                        <input asp-for="FirstName" type="text" class="form-control" />
                                     </div> 
                                     <div class="form-outline col-6 mb-2">
                                         <label class="form-label">Last Name</label>
-                                        <input type="text" class="form-control " />
+                                        <input asp-for="LastName" type="text" class="form-control " />
                                     </div>
                                 </div>
                                 <div class="form-outline mb-2">
                                     <label class="form-label">Your Username</label>
-                                    <input type="text" class="form-control " />
+                                    <input asp-for="Username" type="text" class="form-control " />
                                 </div>
                                 <div class="form-outline mb-2">
                                     <label class="form-label">Password</label>
-                                    <input type="password" class="form-control " />
+                                    <input asp-for="Password" type="password" class="form-control " />
                                 </div>
                                 <div class="form-outline mb-4">
                                     <label class="form-label" >Repeat your password</label>
-                                    <input type="password" class="form-control " />
+                                    <input asp-for="ConfirmPassword" type="password" class="form-control " />
                                 </div>
                                 <div class="d-flex justify-content-center">
-                                    <button type="submit" class="btn btn-primary btn-block btn-lg text-body">
-                                        Register
-                                    </button>
+                                    <input type="submit" class="btn btn-primary btn-block btn-lg text-body" value="Register"/>
                                 </div>
                             </form>
                                 <p class="text-center text-muted mt-5 mb-0">
@@ -48,4 +46,5 @@
             </div>
         </div>
     </div>
+    @Model.Error
 </body>

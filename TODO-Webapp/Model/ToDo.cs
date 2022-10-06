@@ -8,7 +8,10 @@
         public DateTime Created { get; set; } = DateTime.Today;
         public Priority Importance { get; set; }
 
+        public ToDo()
+        {
 
+        }
         public ToDo(string? guid, string description, Priority priority = Priority.Normal)
         {
             if (!string.IsNullOrEmpty(guid))
@@ -32,8 +35,8 @@
     }
     public enum Priority
     {
-        Low,
-        Normal,
-        High
+        Low =1,
+        Normal =2,
+        High =3
     }
 }
