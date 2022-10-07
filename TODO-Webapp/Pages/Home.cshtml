@@ -260,7 +260,7 @@
                             </div>
                             <div class="col-7">
                                 <label>Participants (separeted by ,)</label>
-                                <input type="text" asp-for="Participants" class="form-control" placeholder="User1,User2,User3,User4..." required="true"/>
+                                <input type="text" asp-for="Participants" class="form-control" placeholder="User1,User2,User3,User4..." />
                             </div>
                         </div>
                     </div>
@@ -283,22 +283,30 @@
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <input type="hidden" id="EditID" asp-for="Guid" />
-                        <select class="form-select" id="EditSelect" asp-for="Priority">
-                            <option id="EditPriority1" value="1">Low</option>
-                            <option id="EditPriority2" value="2">Normal</option>
-                            <option id="EditPriority3" value="3">High</option>
-                        </select>
                         <br />
-                        <div class="form-text d-inline-block mb-2">
-                            <label>Title</label>
-                            <input type="text" maxlength="25" class="rounded" id="EditDes" required asp-for="Description" />
+                        <div class="d-flex justify-content-start ">
+                            <div class="col-7">
+                                <label>Title</label>
+                                <input type="text" class="form-control" maxlength="25" id="EditDes" required asp-for="@Model.Description" />
+                                <input type="hidden" id="EditID" asp-for="Guid" value="guid"/>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-start gap-3 col-12">
+                            <div class="col-4">
+                                <label>Priority</label>
+                                <select class="form-select" asp-for="Priority">
+                                    <option value="1">Low</option>
+                                    <option value="2" selected>Normal</option>
+                                    <option value="3">High</option>
+                                </select>
+                            </div>
                             <div class="col-7">
                                 <label>Participants (separeted by ,)</label>
-                                <input type="text" asp-for="Participants" class="form-control" placeholder="User1,User2,User3,User4..." required="true" />
+                                <input type="text" asp-for="Participants" class="form-control" placeholder="User1,User2,User3,User4..."/>
                             </div>
                         </div>
                     </div>
+
 
                     <!-- Modal footer -->
                     <div class="modal-footer">

@@ -11,7 +11,7 @@ namespace TODO_Webapp.Service.Interface
         void DeleteToDo(string guid);
         List<ToDo> GetAllToDosForUser(int UserID);
         ToDo GetToDoById(string id);
-        void UpdateToDo(string guid, string description, Priority priority);
+        void UpdateToDo(string guid, string description, Priority priority, string? party);
         void CompleteToDo(string guid);
         List<ToDo> GetLoadedToDos();
         void DeleteCompleted();

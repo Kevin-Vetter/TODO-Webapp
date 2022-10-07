@@ -24,7 +24,7 @@ namespace TODO_Webapp.DAL
 
         #region ToDo
 
-        public void UpdateToDo(ToDo toDo)
+        public void UpdateToDo(ToDo toDo, string? party)
         {
             using (SqlConnection conn = new(connectionString))
             {
@@ -39,6 +39,24 @@ namespace TODO_Webapp.DAL
                 {
                     conn.Open();
                     cmd.ExecuteNonQuery();
+                    conn.Close();
+                    if (!string.IsNullOrWhiteSpace(party))
+                    {
+
+                        List<string> partyList = party.Split(',', StringSplitOptions.TrimEntries).ToList();
+                        partyList.ForEach(u =>
+                        {
+                            conn.Open();
+                            cmd = new("AddPartyMember", conn)
+                            {
+                                CommandType = CommandType.StoredProcedure
+                            };
+                            cmd.Parameters.AddWithValue("@ToDoID", toDo.Id);
+                            cmd.Parameters.AddWithValue("@Username", u);
+                            cmd.ExecuteNonQuery();
+                            conn.Close();
+                        });
+                    }
                 }
                 catch (Exception e)
                 {

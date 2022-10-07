@@ -20,7 +20,7 @@ namespace TODO_Webapp.Pages
         [BindProperty]
         public bool Completed { get; set; }
         [BindProperty]
-        public string Participants { get; set; }
+        public string? Participants { get; set; }
 
         public List<ToDo> ToDos { get; set; }
 
@@ -56,7 +56,7 @@ namespace TODO_Webapp.Pages
         {
             if (ModelState.IsValid)
             {
-                _repo.UpdateToDo(Guid, Description, Priority);
+                _repo.UpdateToDo(Guid, Description, Priority, Participants);
                 return RedirectToPage();
             }
             return Page();
@@ -69,6 +69,7 @@ namespace TODO_Webapp.Pages
         public IActionResult OnPostDelete()
         {
             _repo.DeleteToDo(Guid);
+            _repo.ClearList();
             return RedirectToPage();
         }
 

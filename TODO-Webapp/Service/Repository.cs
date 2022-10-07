@@ -58,12 +58,12 @@ namespace TODO_Webapp.Service.Interface
         /// <param name="created"></param>
         /// <param name="priority"></param>
         /// <param name="completed"></param>
-        public void UpdateToDo(string guid, string description, Priority priority)
+        public void UpdateToDo(string guid, string description, Priority priority, string? party)
         {
-            ToDo toDo = _toDos.First(x => x.Id == guid);
+            ToDo? toDo = GetToDoById(guid);
             toDo.Description = description;
             toDo.Importance = priority;
-            _dataAccess.UpdateToDo(toDo);
+            _dataAccess.UpdateToDo(toDo,party);
         }
 
         /// <summary>
