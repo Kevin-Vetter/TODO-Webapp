@@ -10,9 +10,17 @@
 
 
 ## Intro
-ToDo-Webapp is a razor page web application, where  a user can create tasks with various priorities and deadlines 
+ToDo-Webapp is a razor page web application, where  a user can create tasks with various priorities and participants.
+All storage goes on in the database, run the DBScript for the complete works.
+
+Database Diagram:
+<img width="814" alt="image" src="https://user-images.githubusercontent.com/96051505/194522872-de31f752-3c60-41cc-83d6-fee5fed8f88e.png">
+
+
+
 
 ## Instructions 
+Log in Or Sign Up.
 Press the 'new' button on the page to get started, if you see no task, try using a different filter by clicking the buttons on the left 
 
 ## Requirements
@@ -30,6 +38,7 @@ Press the 'new' button on the page to get started, if you see no task, try using
 
 
 ## Tags
+* [V2.0](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V2.0)
 * [V1.1](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V1.1)
 * [V1.0](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V1.0)
 * [V0.6](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V0.6)
@@ -41,6 +50,10 @@ Press the 'new' button on the page to get started, if you see no task, try using
 
 
 ## Changelog
+
+### [V2.0](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V2.0) Features:
+* Login, SignUp & Party 
+* Full database implementation
 
 ### [V1.1](https://github.com/Kevin-Vetter/TODO-Webapp/releases/tag/V1.1) Features:
 * Delete all completed todos
@@ -69,4 +82,8 @@ Press the 'new' button on the page to get started, if you see no task, try using
 * Project created
 
 # To-do
-* Do dk-DK option
+* Do da-DK option
+* Edit User
+* Welcome page
+* Pretty errors
+* Error code pages
